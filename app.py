@@ -4,8 +4,8 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Load the trained model
-joblib_file = "random_forest_model.pkl"
-rf = joblib.load(joblib_file)
+joblib_file = "xgboost_model.pkl"
+xgb = joblib.load(joblib_file)
 
 st.set_page_config(
     page_title='Geo-Mechanical Properties Prediction',
@@ -74,7 +74,7 @@ if st.session_state.uploaded_file is not None:
     input_data = data[['Resistivity', 'Gamma Ray', 'Total Porosity', 'Bulk Density']]
 
     # Make predictions
-    predictions = rf.predict(input_data)
+    predictions = xgb.predict(input_data)
 
     # Add predictions to the dataframe
     data['Predicted Poisson Ratio(u)'] = predictions[:, 0]
